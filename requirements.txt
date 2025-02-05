@@ -1,1 +1,5 @@
 flask==2.1.2
+Flask==2.x.x
+unittest
+# Add other dependencies here
+
