@@ -5,28 +5,12 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Creating virtual environment and installing dependencies...'
-                sh '''
-                # Create virtual environment if not exists
-                python3 -m venv venv
-                source venv/bin/activate
-
-                # Install dependencies
-                if [ -f requirements.txt ]; then
-                    pip install -r requirements.txt
-                else
-                    echo "requirements.txt not found!"
-                fi
-                '''
             }
         }
         stage('Test') {
             steps {
                 echo 'Running tests...'
-                sh '''
-                # Activate virtual environment
-                source venv/bin/activate
-                python3 -m unittest discover -s .
-                '''
+                sh 'python3 -m unittest discover -s .'
             }
         }
         stage('Deploy') {
@@ -62,5 +46,7 @@ pipeline {
             echo 'Pipeline completed successfully!'
         }
         failure {
-            echo 'Pipeline failed. Check the logs for mo
-
+            echo 'Pipeline failed. Check the logs for more details.'
+        }
+    }
+}
